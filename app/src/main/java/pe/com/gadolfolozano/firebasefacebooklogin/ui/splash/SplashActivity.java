@@ -1,4 +1,4 @@
-package pe.com.gadolfolozano.firebasefacebooklogin.ui;
+package pe.com.gadolfolozano.firebasefacebooklogin.ui.splash;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,10 +6,10 @@ import android.os.Bundle;
 import javax.inject.Inject;
 
 import pe.com.gadolfolozano.firebasefacebooklogin.BR;
-import pe.com.gadolfolozano.firebasefacebooklogin.MainActivity;
 import pe.com.gadolfolozano.firebasefacebooklogin.R;
 import pe.com.gadolfolozano.firebasefacebooklogin.base.BaseActivity;
 import pe.com.gadolfolozano.firebasefacebooklogin.databinding.ActivitySplashBinding;
+import pe.com.gadolfolozano.firebasefacebooklogin.ui.login.LoginActivity;
 
 public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashViewModel> {
 
@@ -41,7 +41,8 @@ public class SplashActivity extends BaseActivity<ActivitySplashBinding, SplashVi
 
     private void observeNavigateToLogin(Boolean shouldNavigate) {
         if(shouldNavigate != null && shouldNavigate){
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, LoginActivity.class));
+            finish();
         }
     }
 }

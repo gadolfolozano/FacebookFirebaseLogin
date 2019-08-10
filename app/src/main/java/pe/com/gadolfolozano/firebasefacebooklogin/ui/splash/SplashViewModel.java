@@ -1,4 +1,4 @@
-package pe.com.gadolfolozano.firebasefacebooklogin.ui;
+package pe.com.gadolfolozano.firebasefacebooklogin.ui.splash;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
