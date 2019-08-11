@@ -46,4 +46,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-core:17.0.1'
     implementation 'com.google.firebase:firebase-auth:18.1.0'
     implementation 'com.google.firebase:firebase-database:18.0.1'
+
+    //Facebook
+    implementation 'com.facebook.android:facebook-login:5.2.0'
+
 }
+
+apply plugin: 'com.google.gms.google-services'
