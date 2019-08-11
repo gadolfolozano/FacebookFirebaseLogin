@@ -2,7 +2,6 @@ package pe.com.gadolfolozano.firebasefacebooklogin.ui.login;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -17,13 +16,13 @@ import java.util.Arrays;
 import javax.inject.Inject;
 
 import pe.com.gadolfolozano.firebasefacebooklogin.BR;
+import pe.com.gadolfolozano.firebasefacebooklogin.MainActivity;
 import pe.com.gadolfolozano.firebasefacebooklogin.R;
 import pe.com.gadolfolozano.firebasefacebooklogin.base.BaseActivity;
 import pe.com.gadolfolozano.firebasefacebooklogin.databinding.ActivityLoginBinding;
+import pe.com.gadolfolozano.firebasefacebooklogin.model.LoginResponseModel;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
-    private static final String TAG = LoginActivity.class.getCanonicalName();
-
     private CallbackManager callbackManager;
 
     @Inject
@@ -47,36 +46,62 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "facebook:onCreate:");
 
         viewModel.getLoginClick().observe(this, this::observeLoginClick);
+        viewModel.getLoading().observe(this, this::observeLoading);
 
         callbackManager = CallbackManager.Factory.create();
 
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Log.d(TAG, "facebook:onSuccess:" + loginResult);
-                // App code
+                viewModel.validateAccessToken(loginResult.getAccessToken()).observe(LoginActivity.this, LoginActivity.this::observeLoginResponse);
             }
 
             @Override
             public void onCancel() {
-                Log.d(TAG, "facebook:onCancel");
-                // App code
+                showAlert(
+                        getString(R.string.text_alert_error_login_facebook_title),
+                        getString(R.string.text_alert_error_login_facebook_cancelled_message),
+                        getString(R.string.text_alert_error_login_button));
             }
 
             @Override
             public void onError(FacebookException error) {
-                Log.d(TAG, "facebook:onError", error);
-                // App code
+                showAlert(
+                        getString(R.string.text_alert_error_login_facebook_title),
+                        error.getMessage(),
+                        getString(R.string.text_alert_error_login_button));
             }
         });
     }
 
+    private void observeLoginResponse(LoginResponseModel loginResponseModel) {
+        if (loginResponseModel != null) {
+            viewModel.getLoading().setValue(false);
+            if (loginResponseModel.isSucessfull()) {
+                startActivity(new Intent(this, MainActivity.class));
+            } else {
+                showAlert(
+                        getString(R.string.text_alert_error_login_firebase_title),
+                        loginResponseModel.getErrorMessage(),
+                        getString(R.string.text_alert_error_login_button));
+            }
+        }
+    }
+
+    private void observeLoading(Boolean loading) {
+        if (loading != null) {
+            if (loading) {
+                showLoading();
+            } else {
+                hideLoading();
+            }
+        }
+    }
+
     private void observeLoginClick(Boolean shouldClickLogin) {
         if (shouldClickLogin != null && shouldClickLogin) {
-            Log.d(TAG, "facebook:performlogin:");
             LoginManager.getInstance().logInWithReadPermissions(LoginActivity.this, Arrays.asList("public_profile", "user_friends"));
         }
     }

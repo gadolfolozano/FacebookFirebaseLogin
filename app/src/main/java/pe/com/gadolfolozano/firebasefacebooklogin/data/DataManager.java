@@ -1,4 +1,6 @@
 package pe.com.gadolfolozano.firebasefacebooklogin.data;
 
-public interface DataManager {
+import pe.com.gadolfolozano.firebasefacebooklogin.data.firebase.FirebaseHelper;
+
+public interface DataManager extends FirebaseHelper {
 }

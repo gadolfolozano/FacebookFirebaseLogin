@@ -1,10 +1,8 @@
 package pe.com.gadolfolozano.firebasefacebooklogin.base;
 
-import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -17,10 +15,11 @@ import androidx.databinding.ViewDataBinding;
 import androidx.lifecycle.ViewModel;
 
 import dagger.android.AndroidInjection;
+import pe.com.gadolfolozano.firebasefacebooklogin.util.CommonUtils;
 
 public abstract class BaseActivity<T extends ViewDataBinding, V extends ViewModel> extends AppCompatActivity {
 
-    private ProgressDialog mProgressDialog;
+    private ProgressDialog progressDialog;
     private T viewDataBinding;
     private V viewModel;
 
@@ -67,8 +66,8 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends ViewMode
     }
 
     public void hideLoading() {
-        if (mProgressDialog != null && mProgressDialog.isShowing()) {
-            mProgressDialog.cancel();
+        if (progressDialog != null && progressDialog.isShowing()) {
+            progressDialog.cancel();
         }
     }
 
@@ -78,7 +77,7 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends ViewMode
 
     public void showLoading() {
         hideLoading();
-        //mProgressDialog = CommonUtils.showLoadingDialog(this);
+        progressDialog = CommonUtils.showLoadingDialog(this);
     }
 
     private void performDataBinding() {
@@ -86,6 +85,15 @@ public abstract class BaseActivity<T extends ViewDataBinding, V extends ViewMode
         this.viewModel = viewModel == null ? getViewModel() : viewModel;
         viewDataBinding.setVariable(getBindingVariable(), viewModel);
         viewDataBinding.executePendingBindings();
+    }
+
+    protected void showAlert(String title, String message, String positiveButtonText){
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(positiveButtonText, (dialogInterface, i) -> {
+                    //Do nothing
+                }).show();
     }
 
 }
