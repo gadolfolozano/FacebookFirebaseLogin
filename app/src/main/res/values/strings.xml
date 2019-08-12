@@ -7,8 +7,15 @@
     <string name="text_button_login">Login with Facebook</string>
 
     <string name="text_alert_error_login_firebase_title">Login Firebase Error</string>
-    <string name="text_alert_error_login_button">Ok</string>
+    <string name="text_alert_error_login_button">OK</string>
 
     <string name="text_alert_error_login_facebook_title">Login Facebook Error</string>
     <string name="text_alert_error_login_facebook_cancelled_message">Login was cancelled</string>
+
+    <string name="text_hint_name">Nombre</string>
+    <string name="text_hint_surname">Apellido</string>
+    <string name="text_hint_age">Edad</string>
+    <string name="text_hint_birthday">Fecha de Nacimiento</string>
+
+    <string name="text_save_changes">Guardar Cambios</string>
 </resources>

@@ -16,11 +16,11 @@ import java.util.Arrays;
 import javax.inject.Inject;
 
 import pe.com.gadolfolozano.firebasefacebooklogin.BR;
-import pe.com.gadolfolozano.firebasefacebooklogin.MainActivity;
 import pe.com.gadolfolozano.firebasefacebooklogin.R;
 import pe.com.gadolfolozano.firebasefacebooklogin.base.BaseActivity;
 import pe.com.gadolfolozano.firebasefacebooklogin.databinding.ActivityLoginBinding;
 import pe.com.gadolfolozano.firebasefacebooklogin.model.LoginResponseModel;
+import pe.com.gadolfolozano.firebasefacebooklogin.ui.register.RegisterActivity;
 
 public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewModel> {
     private CallbackManager callbackManager;
@@ -80,7 +80,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
         if (loginResponseModel != null) {
             viewModel.getLoading().setValue(false);
             if (loginResponseModel.isSucessfull()) {
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, RegisterActivity.class));
                 finish();
             } else {
                 showAlert(
