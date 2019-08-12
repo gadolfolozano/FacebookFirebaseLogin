@@ -81,6 +81,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
             viewModel.getLoading().setValue(false);
             if (loginResponseModel.isSucessfull()) {
                 startActivity(new Intent(this, MainActivity.class));
+                finish();
             } else {
                 showAlert(
                         getString(R.string.text_alert_error_login_firebase_title),
