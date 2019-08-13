@@ -17,6 +17,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import pe.com.gadolfolozano.firebasefacebooklogin.model.LoginResponseModel;
+import pe.com.gadolfolozano.firebasefacebooklogin.model.RegisterResponseModel;
 
 @Singleton
 public class FirebaseHelperImplements implements FirebaseHelper {
@@ -35,7 +36,7 @@ public class FirebaseHelperImplements implements FirebaseHelper {
         MutableLiveData<LoginResponseModel> loginResponse = new MutableLiveData<>();
         AuthCredential credential = FacebookAuthProvider.getCredential(accessToken.getToken());
         auth.signInWithCredential(credential).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
+            if (task.isSuccessful()) {
                 saveUser(loginResponse);
             } else if (task.getException() != null) {
                 LoginResponseModel response = new LoginResponseModel();
@@ -46,13 +47,41 @@ public class FirebaseHelperImplements implements FirebaseHelper {
         return loginResponse;
     }
 
-    private void saveUser(MutableLiveData<LoginResponseModel> loginResponse){
+    @Override
+    public LiveData<RegisterResponseModel> performSaveData(String name, String surname, String age, String birthDay) {
+        MutableLiveData<RegisterResponseModel> registerResponse = new MutableLiveData<>();
         FirebaseUser currentUser = auth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
+            Map<String, Object> user = new HashMap<>();
+            user.put("id", currentUser.getUid());
+            user.put("name", name);
+            user.put("surname", surname);
+            user.put("age", age);
+            user.put("birthday", birthDay);
+
+            db.collection("users").document(currentUser.getUid()).set(user)
+                    .addOnSuccessListener(documentReference -> {
+                        RegisterResponseModel response = new RegisterResponseModel();
+                        response.setSucessfull(true);
+                        registerResponse.setValue(response);
+                    })
+                    .addOnFailureListener(e -> {
+                        RegisterResponseModel response = new RegisterResponseModel();
+                        response.setSucessfull(false);
+                        response.setErrorMessage(e.getMessage());
+                        registerResponse.setValue(response);
+                    });
+        }
+        return registerResponse;
+    }
+
+    private void saveUser(MutableLiveData<LoginResponseModel> loginResponse) {
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
             Map<String, Object> user = new HashMap<>();
             user.put("id", currentUser.getUid());
 
-            db.collection("users").add(user)
+            db.collection("users").document(currentUser.getUid()).set(user)
                     .addOnSuccessListener(documentReference -> {
                         LoginResponseModel response = new LoginResponseModel();
                         response.setSucessfull(true);

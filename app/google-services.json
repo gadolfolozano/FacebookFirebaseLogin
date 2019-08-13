@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "747920922228",
+    "firebase_url": "https://fir-facebooklogin-4e26b.firebaseio.com",
+    "project_id": "fir-facebooklogin-4e26b",
+    "storage_bucket": "fir-facebooklogin-4e26b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:747920922228:android:e329d1d5c8f229d2",
+        "android_client_info": {
+          "package_name": "pe.com.gadolfolozano.firebasefacebooklogin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "747920922228-cu0amhj0msl1ec4oks3um3ha9uael2h3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBsFVPWQhHJfu6OHBbUfR7Qj9eg5IysnVw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "747920922228-cu0amhj0msl1ec4oks3um3ha9uael2h3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

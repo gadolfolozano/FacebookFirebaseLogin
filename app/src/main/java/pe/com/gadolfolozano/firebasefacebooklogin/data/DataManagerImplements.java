@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 
 import pe.com.gadolfolozano.firebasefacebooklogin.data.firebase.FirebaseHelper;
 import pe.com.gadolfolozano.firebasefacebooklogin.model.LoginResponseModel;
+import pe.com.gadolfolozano.firebasefacebooklogin.model.RegisterResponseModel;
 
 @Singleton
 public class DataManagerImplements implements DataManager {
@@ -29,5 +30,10 @@ public class DataManagerImplements implements DataManager {
     @Override
     public LiveData<LoginResponseModel> validateAccessToken(AccessToken accessToken) {
         return this.firebaseHelper.validateAccessToken(accessToken);
+    }
+
+    @Override
+    public LiveData<RegisterResponseModel> performSaveData(String name, String surname, String age, String birthDay) {
+        return this.firebaseHelper.performSaveData(name, surname, age, birthDay);
     }
 }

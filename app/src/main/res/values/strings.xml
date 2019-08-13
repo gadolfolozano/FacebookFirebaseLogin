@@ -18,4 +18,8 @@
     <string name="text_hint_birthday">Fecha de Nacimiento</string>
 
     <string name="text_save_changes">Guardar Cambios</string>
+
+    <string name="text_alert_error_register_title">Register Error</string>
+    <string name="text_alert_error_register_message">Por favor, completa los campos</string>
+    <string name="text_alert_error_register_button">Aceptar</string>
 </resources>

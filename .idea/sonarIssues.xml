@@ -113,7 +113,17 @@
             <set />
           </value>
         </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/pe/com/gadolfolozano/firebasefacebooklogin/ui/register/DatePickerDialogFragment.java">
+          <value>
+            <set />
+          </value>
+        </entry>
         <entry key="$PROJECT_DIR$/app/src/main/java/pe/com/gadolfolozano/firebasefacebooklogin/ui/register/RegisterActivity.java">
+          <value>
+            <set />
+          </value>
+        </entry>
+        <entry key="$PROJECT_DIR$/app/src/main/java/pe/com/gadolfolozano/firebasefacebooklogin/ui/register/RegisterViewModel.java">
           <value>
             <set />
           </value>
