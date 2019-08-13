@@ -55,7 +55,10 @@ public class RegisterActivity extends BaseActivity<ActivityRegisterBinding, Regi
             }
             return false;
         });
-        binding.tvBirthday.setOnClickListener(v -> showDatePicker());
+        binding.tvBirthday.setOnClickListener(v -> {
+            hideKeyboard();
+            showDatePicker();
+        });
 
         viewModel.getLoading().observe(this, this::observeLoading);
         viewModel.getShowError().observe(this, this::observeShowError);
